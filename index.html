@@ -3,92 +3,288 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unity Capital Bank - Chat Assistant</title>
+  <title>Unity Capital Bank - Digital Assistant</title>
   <style>
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #f3f6f9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
       margin: 0;
-      padding: 20px;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #001f3f, #004b8d);
+      color: #ffffff;
+      overflow-x: hidden;
     }
 
-    header {
+    /* header {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      margin-bottom: 40px;
-      text-align: center;
+      justify-content: space-between;
+      padding: 20px 50px;
+      background: rgba(0, 0, 50, 0.6);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     header img {
-      width: 180px;
+      width: 160px;
+    }
+
+    nav a {
+      color: #ffffff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    } */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #002b5c;
+    padding: 10px 40px;
+    height: 50px; /* Reduced height for compact look */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  header img {
+    width: 100px; /* Smaller logo size */
+    height: auto;
+  }
+
+  nav {
+    display: flex;
+    gap: 30px;
+  }
+
+  nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    padding-bottom: 3px;
+  }
+
+  nav a:hover {
+    color: #66b2ff;
+    border-bottom: 2px solid #66b2ff;
+  }
+
+  /* Responsive behavior */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
       height: auto;
+      padding: 15px 20px;
+    }
+
+    header img {
+      width: 100px;
       margin-bottom: 10px;
     }
 
-    header h1 {
-      color: #003366;
-      font-size: 24px;
-      margin: 0;
+    nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
     }
 
-    #chat-container {
-      width: 100%;
-      max-width: 500px;
+    nav a {
+      font-size: 15px;
+    }
+  }
+
+
+
+
+
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,50,0.7));
+      background-image: url('back-img.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 60px;
+      text-align: center;
+      background: #f9f9f9;
+      color: #001f3f;
+    }
+
+    .card {
       background: white;
       border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 30px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .card img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
     }
 
     footer {
-      margin-top: 40px;
+      text-align: center;
+      padding: 30px;
+      background: #002b5c;
+      color: #cce0ff;
       font-size: 14px;
-      color: #666;
+    }
+
+    /* Chatbot floating button */
+    #chat-widget {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #004b8d;
+      color: white;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: transform 0.3s;
+      z-index: 1000;
+    }
+
+    #chat-widget:hover {
+      transform: scale(1.1);
+    }
+
+    iframe {
+      position: fixed;
+      bottom: 100px;
+      right: 25px;
+      width: 400px;
+      height: 550px;
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      display: none;
+      z-index: 999;
+    }
+
+    @media (max-width: 600px) {
+      iframe {
+        width: 90%;
+        height: 70vh;
+        right: 5%;
+        bottom: 90px;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="ChatGPT Image Oct 17, 2025, 01_44_54 PM.png" alt="Unity Capital Bank Logo" />
-    <h1>Unity Capital Bank Chat Assistant</h1>
+    <img src="Bank-logo.png" alt="Unity Capital Bank Logo"/>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Loans</a>
+      <a href="#">Contact</a>
+    </nav>
   </header>
 
-  <div id="chat-container">
-    <!-- 💬 Your chat widget or chatbot code goes here -->
-    <p>Welcome to Unity Capital Bank! How can we assist you today?</p>
+  <section class="hero">
+    <h1>Welcome to Unity Capital Bank</h1>
+    <p>Experience next-generation digital banking with real-time loan support, smart credit analysis, and secure conversations — powered by AI.</p>
+  </section>
+
+  <section class="features">
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Loan Services" />
+      <h3>Instant Loan Services</h3>
+      <p>Apply for personal, vehicle, or home loans in minutes with instant eligibility checks.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3616/3616898.png" alt="Credit Score" />
+      <h3>Check Credit Score & Loan Eligibility</h3>
+      <p>Instantly know your credit score using your PAN — fast, safe. and account eligibility</p>
+    </div>
+
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/686/686104.png" alt="Account Services" />
+      <h3>Smart Account Management</h3>
+      <p>Manage all your savings and current accounts securely through AI-powered chat support.</p>
+    </div>
+  </section>
+
+  <div id="chat-widget" onclick="toggleChat()">
+    💬
   </div>
+
+  <iframe id="chat-frame"></iframe>
 
   <footer>
     © 2025 Unity Capital Bank. All rights reserved.
   </footer>
 
-  <script type='text/javascript'>
-	function initEmbeddedMessaging() {
-		try {
-			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+  <script>
+    // Chat toggle functionality
+    function toggleChat() {
+      const frame = document.getElementById("chat-frame");
+      if (frame.style.display === "none" || frame.style.display === "") {
+        frame.style.display = "block";
+      } else {
+        frame.style.display = "none";
+      }
+    }
 
-			embeddedservice_bootstrap.init(
-				'00DgK000005Z8Cj',
-				'Github_Messaging_Setting',
-				'https://orgfarm-4fc9bbb625-dev-ed.develop.my.site.com/ESWGithubMessagingSetti1761662988879',
-				{
-					scrt2URL: 'https://orgfarm-4fc9bbb625-dev-ed.develop.my.salesforce-scrt.com'
-				}
-			);
-		} catch (err) {
-			console.error('Error loading Embedded Messaging: ', err);
-		}
-	};
-</script>
-<script type='text/javascript' src='https://orgfarm-4fc9bbb625-dev-ed.develop.my.site.com/ESWGithubMessagingSetti1761662988879/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+    // Salesforce Embedded Chatbot Init
+    function initEmbeddedMessaging() {
+      try {
+        embeddedservice_bootstrap.settings.language = 'en_US';
 
+        embeddedservice_bootstrap.init(
+          '00DgK000005Z8Cj',
+          'Github_Messaging_Setting',
+          'https://orgfarm-4fc9bbb625-dev-ed.develop.my.site.com/EMessagingSetti1761662988879',
+          {
+            scrt2URL: 'https://orgfarm-4fc9bbb625-dev-ed.develop.mt.com'
+          }
+        );
+      } catch (err) {
+        console.error('Error loading Embedded Messaging: ', err);
+      }
+    }
+  </script>
+
+  <script 
+    type="text/javascript" 
+    src="https://orgfarm-4fc9bbb625-dev-ed.develop.my.site.com/ESWGi1761662988879/assets/js/bootstrap.min.js"
+    onload="initEmbeddedMessaging()">
+  </script>
 
 </body>
 </html>
